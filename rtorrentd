@@ -1,0 +1,29 @@
+#!/bin/sh
+
+BINARYNAME=rtorrentd
+COMMANDLINE_PARAMETERS=""
+PID_FILE=rtorrentd.pid
+
+case $1 in
+        start)
+                echo "Starting rtorrent... "
+                /usr/bin/screen -fn -dmS rtorrent /usr/bin/rtorrent
+                echo "Done"
+        ;;
+        stop)
+                echo "Shutting down rtorrent... "
+                /usr/bin/screen -S rtorrent -X quit
+                echo "Done"
+        ;;
+        restart)
+                echo "Shutting down rtorrent... "
+                /usr/bin/screen -S rtorrent -X quit
+                echo "Starting rtorrent... "
+                /usr/bin/screen -fn -dmS rorrent /usr/bin/rtorrent
+                echo "Done"
+        ;;
+        *)
+                echo "Usage: $SCRIPTNAME {start|stop|restart}" >&2
+                exit 2
+        ;;
+esac
